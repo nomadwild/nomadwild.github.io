@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NomadWild | Aventura Activa</title>
+    <title>NomadWild | Aventura Activa e Inteligencia Salvaje</title>
     <style>
         * {
             margin: 0;
@@ -14,6 +14,7 @@
         body {
             background-color: #111;
             color: #fff;
+            scroll-behavior: smooth;
         }
         header {
             background-color: #1b2e1e;
@@ -57,9 +58,7 @@
             background: #121f14;
             border-top: 4px solid #4a7c59;
         }
-        .btn-survival {
-            background-color: #4a7c59;
-        }
+        .btn-survival { background-color: #4a7c59; }
         .btn-survival:hover { background-color: #385e43; }
 
         /* --- SECCIÓN 2: AUTOCARAVANA (ATARDECER / CÁLIDOS) --- */
@@ -72,9 +71,7 @@
             background: #2c1a10;
             border-top: 4px solid #e67e22;
         }
-        .btn-camper {
-            background-color: #e67e22;
-        }
+        .btn-camper { background-color: #e67e22; }
         .btn-camper:hover { background-color: #d35400; }
 
         /* --- SECCIÓN 3: PESCA (AZULES DE AGUA) --- */
@@ -87,10 +84,130 @@
             background: #0d1e3d;
             border-top: 4px solid #2b6cb0;
         }
-        .btn-fishing {
-            background-color: #2b6cb0;
-        }
+        .btn-fishing { background-color: #2b6cb0; }
         .btn-fishing:hover { background-color: #2b529a; }
+
+        /* --- SECCIÓN 4: CONSEJOS & NOMAD AI (ZONA OSCURA TÁCTICA) --- */
+        .section-ai-hub {
+            background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+            padding: 60px 5%;
+            border-top: 2px dashed #1e293b;
+        }
+        .ai-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .info-guides {
+            flex: 1;
+            min-width: 300px;
+        }
+        .guide-box {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #e67e22;
+        }
+        .guide-box h4 { margin-bottom: 5px; color: #f8fafc; }
+        .guide-box p { font-size: 14px; color: #94a3b8; }
+
+        /* Estilos del Chatbot interactivo */
+        .chat-widget {
+            flex: 1;
+            min-width: 300px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        .chat-header {
+            background: #1e293b;
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #334155;
+        }
+        .ai-status {
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+        .chat-body {
+            height: 320px;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .msg {
+            padding: 10px 14px;
+            border-radius: 8px;
+            max-width: 85%;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .msg.ai { background: #334155; align-self: flex-start; color: #fff; }
+        .msg.user { background: #e67e22; align-self: flex-end; color: #fff; }
+        
+        /* Caja de producto recomendado dentro del chat */
+        .chat-recommendation {
+            background: #1e293b;
+            border: 1px solid #e67e22;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .chat-recommendation span {
+            font-size: 11px;
+            color: #e67e22;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .chat-recommendation h5 {
+            font-size: 14px;
+            color: #fff;
+        }
+        .chat-recommendation-link {
+            color: #fff;
+            background: #e67e22;
+            text-decoration: none;
+            padding: 5px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            background: #1e293b;
+            gap: 10px;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: white;
+        }
+        .chat-input:focus { outline: none; border-color: #e67e22; }
 
         /* --- ESTILOS COMUNES DE PRODUCTOS --- */
         h2 { 
@@ -104,6 +221,7 @@
             margin-bottom: 40px;
             font-size: 16px;
             color: #e2e8f0;
+            text-align: center;
         }
         .grid-products {
             display: grid;
@@ -136,7 +254,7 @@
         }
 
         footer {
-            background-color: #0f172a;
+            background-color: #020617;
             color: #64748b;
             padding: 40px 5%;
             text-align: center;
@@ -153,6 +271,7 @@
                 <li><a href="#supervivencia">Supervivencia</a></li>
                 <li><a href="#autocaravana">Casas Rodantes</a></li>
                 <li><a href="#pesca">Pesca</a></li>
+                <li><a href="#consejos">NomadAI & Consejos</a></li>
             </ul>
         </div>
     </header>
@@ -191,62 +310,4 @@
         <h2>Mundo Casa Rodante & Overland</h2>
         <p class="subtitle">Optimización de espacio y energía para tu vida en ruta</p>
         
-        <div class="grid-products">
-            <div class="prod-card camper-card">
-                <div>
-                    <div class="prod-title">Estación Solar Portátil</div>
-                    <div class="prod-desc">Generador de energía de 500W con panel plegable integrado para acampada libre.</div>
-                </div>
-                <div>
-                    <div class="prod-price">349,00 €</div>
-                    <button class="btn btn-camper">Comprar Ahora</button>
-                </div>
-            </div>
-            <div class="prod-card camper-card">
-                <div>
-                    <div class="prod-title">Menaje Colapsable Premium</div>
-                    <div class="prod-desc">Set de ollas y vajilla de silicona de grado alimentario que se pliega por completo.</div>
-                </div>
-                <div>
-                    <div class="prod-price">59,90 €</div>
-                    <button class="btn btn-camper">Comprar Ahora</button>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- ZONA 3: PESCA (TONOS AZULES DE AGUA) -->
-    <section class="section-fishing" id="pesca">
-        <h2>Pesca de Aventura</h2>
-        <p class="subtitle">Equipamiento técnico para capturas en ríos, lagos y mar abierto</p>
-        
-        <div class="grid-products">
-            <div class="prod-card fishing-card">
-                <div>
-                    <div class="prod-title">Caña Telescópica Stealth</div>
-                    <div class="prod-desc">Fibra de carbono de alta densidad. Se reduce a solo 40cm para guardarla en la camper.</div>
-                </div>
-                <div>
-                    <div class="prod-price">85,00 €</div>
-                    <button class="btn btn-fishing">Comprar Ahora</button>
-                </div>
-            </div>
-            <div class="prod-card fishing-card">
-                <div>
-                    <div class="prod-title">Caja de Señuelos Depredador</div>
-                    <div class="prod-desc">Kit de 45 piezas seleccionadas para pesca fluvial en zonas boscosas o lagos profundos.</div>
-                </div>
-                <div>
-                    <div class="prod-price">24,50 €</div>
-                    <button class="btn btn-fishing">Comprar Ahora</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 NomadWild. La naturaleza es tu hogar, nosotros llevamos el equipo.</p>
-    </footer>
-
-</body>
-</html>
