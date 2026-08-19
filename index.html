@@ -17,15 +17,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: var(--wild-black); color: #f1f5f9; scroll-behavior: smooth; overflow-x: hidden; }
         
-        /* --- ANIMACIONES Y ESTILO SALVAJE --- */
         header { 
-            background: rgba(17, 24, 18, 0.95); 
-            padding: 20px 5%; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            border-bottom: 2px solid #273e2d;
-            backdrop-filter: blur(10px);
+            background: rgba(17, 24, 18, 0.95); padding: 20px 5%; position: sticky; top: 0; z-index: 1000; 
+            border-bottom: 2px solid #273e2d; backdrop-filter: blur(10px);
         }
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 26px; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
@@ -35,8 +29,7 @@
         .nav-menu a { color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 14px; text-transform: uppercase; transition: all 0.4s ease; }
         .nav-menu a:hover { color: var(--accent-wood); letter-spacing: 1px; }
 
-        /* --- GRADIENTES SALVAJES Y TRANSICIONES --- */
-        section { padding: 80px 5%; text-align: center; transition: transform 0.5s ease-in-out; }
+        section { padding: 80px 5%; text-align: center; }
         .section-survival { background: linear-gradient(180deg, #111812 0%, var(--survival-green) 100%); }
         .section-camper { background: linear-gradient(180deg, var(--survival-green) 0%, #3e2311 40%, var(--camper-orange) 100%); }
         .section-fishing { background: linear-gradient(180deg, var(--camper-orange) 0%, #101d2d 50%, var(--fishing-blue) 100%); }
@@ -46,79 +39,97 @@
         h2 { font-size: 38px; font-weight: 900; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0,0,0,0.8); }
         .subtitle { margin-bottom: 50px; font-size: 16px; color: #94a3b8; font-style: italic; }
 
-        /* --- TARJETAS DE PRODUCTO MODERNAS --- */
         .grid-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; max-width: 1200px; margin: 0 auto; }
         .prod-card { 
-            border-radius: 16px; padding: 30px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6); 
-            display: flex; flex-direction: column; justify-content: space-between; 
-            text-align: left; min-height: 280px; 
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative; overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); 
+            display: flex; flex-direction: column; justify-content: space-between; text-align: left; min-height: 280px; 
+            transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
         }
-        .prod-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.8); border-color: rgba(255,255,255,0.15); }
+        .prod-card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(255,255,255,0.15); }
         .survival-card { background: rgba(18, 31, 20, 0.8); border-left: 5px solid #4a7c59; }
         .camper-card { background: rgba(44, 26, 16, 0.8); border-left: 5px solid var(--accent-wood); }
         .fishing-card { background: rgba(13, 30, 61, 0.8); border-left: 5px solid #2b6cb0; }
         
-        .prod-title { font-size: 22px; font-weight: 800; margin-bottom: 12px; letter-spacing: 0.5px; }
+        .prod-title { font-size: 22px; font-weight: 800; margin-bottom: 12px; }
         .prod-desc { font-size: 14px; color: #94a3b8; margin-bottom: 25px; line-height: 1.5; }
-        .prod-price { font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
+        .prod-price { font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 20px; }
         
-        /* --- BOTONES CON ACCIÓN --- */
         .btn { 
-            color: white; padding: 14px; text-decoration: none; font-weight: 800; 
-            border-radius: 8px; border: none; cursor: pointer; text-align: center; 
-            display: block; width: 100%; text-transform: uppercase; letter-spacing: 1px;
-            transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            color: white; padding: 14px; text-decoration: none; font-weight: 800; border-radius: 8px; border: none; 
+            cursor: pointer; text-align: center; display: block; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; 
         }
         .btn-survival { background: #4a7c59; } .btn-survival:hover { background: #385e43; }
         .btn-camper { background: var(--accent-wood); } .btn-camper:hover { background: #d35400; }
         .btn-fishing { background: #2b6cb0; } .btn-fishing:hover { background: #1a4975; }
 
-        /* --- SITEMA DE CARRITO DE COMPRAS --- */
-        .cart-icon-btn { position: relative; background: none; border: none; color: white; cursor: pointer; font-size: 18px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
-        .cart-count { background: var(--accent-wood); color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; font-weight: bold; }
+        /* CARRITO */
+        .cart-icon-btn { position: relative; background: none; border: none; color: white; cursor: pointer; font-size: 16px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+        .cart-count { background: var(--accent-wood); color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; }
         .cart-dropdown { 
-            position: absolute; top: 70px; right: 5%; background: #151d24; 
-            border: 2px solid #223142; border-radius: 12px; width: 340px; padding: 20px; 
-            display: none; box-shadow: 0 20px 40px rgba(0,0,0,0.8); z-index: 2000; text-align: left;
+            position: absolute; top: 70px; right: 5%; background: #151d24; border: 2px solid #223142; 
+            border-radius: 12px; width: 340px; padding: 20px; display: none; box-shadow: 0 20px 40px rgba(0,0,0,0.8); z-index: 2000; text-align: left;
         }
         .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #2c3e50; font-size: 14px; }
-        .cart-item-title { font-weight: bold; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .cart-total { font-size: 18px; font-weight: 900; display: flex; justify-content: space-between; margin: 15px 0; border-top: 2px solid #34495e; padding-top: 10px; }
 
-        /* --- MAPA DIDÁCTICO E INTERACTIVO --- */
+        /* MAPA */
         .map-controls { margin-bottom: 30px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-        .btn-map-filter { background: #1e293b; border: 1px solid #334155; padding: 12px 24px; color: white; border-radius: 30px; cursor: pointer; font-weight: 700; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; font-size: 12px; }
-        .btn-map-filter.active { background: var(--accent-wood); border-color: var(--accent-wood); box-shadow: 0 0 15px rgba(230,126,34,0.6); }
-        #map { height: 500px; width: 100%; max-width: 1200px; margin: 0 auto; border-radius: 16px; border: 2px solid #223142; box-shadow: 0 15px 35px rgba(0,0,0,0.7); }
-        .map-popup { color: #111; min-width: 200px; }
-        .map-popup h4 { font-weight: 800; color: #0f172a; margin-bottom: 4px; font-size: 15px; }
-        .map-popup p { font-size: 13px; color: #475569; margin-bottom: 10px; }
-        .map-popup-btn { display: block; text-align: center; background: var(--accent-wood); color: white !important; text-decoration: none; padding: 6px; font-size: 12px; font-weight: bold; border-radius: 4px; }
+        .btn-map-filter { background: #1e293b; border: 1px solid #334155; padding: 12px 24px; color: white; border-radius: 30px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-size: 11px; }
+        .btn-map-filter.active { background: var(--accent-wood); border-color: var(--accent-wood); }
+        #map { height: 450px; width: 100%; max-width: 1200px; margin: 0 auto; border-radius: 16px; border: 2px solid #223142; }
+        .map-popup { color: #111; min-width: 180px; }
+        .map-popup h4 { font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+        .map-popup p { font-size: 13px; color: #475569; }
+        .map-popup-btn { display: block; text-align: center; background: var(--accent-wood); color: white !important; text-decoration: none; padding: 6px; font-size: 11px; font-weight: bold; border-radius: 4px; margin-top: 8px; }
 
-        /* --- CHAT INTELIGENTE REAL NOMADAI --- */
+        /* CHAT IA */
         .ai-container { display: flex; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto; text-align: left; }
-        .info-guides { flex: 1; min-width: 320px; }
-        .guide-box { background: #16222f; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 5px solid var(--accent-wood); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .guide-box h4 { margin-bottom: 8px; font-weight: 800; font-size: 18px; }
+        .info-guides { flex: 1; min-width: 300px; }
+        .guide-box { background: #16222f; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 5px solid var(--accent-wood); }
+        .guide-box h4 { margin-bottom: 8px; font-weight: 800; }
         .guide-box p { font-size: 14px; color: #94a3b8; line-height: 1.5; }
-        
-        .chat-widget { flex: 12; min-width: 320px; background: #0b1219; border: 1px solid #223142; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.6); }
-        .chat-header { background: #16222f; padding: 20px; font-weight: 800; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #223142; font-size: 16px; letter-spacing: 0.5px; }
+        .chat-widget { flex: 1.5; min-width: 320px; background: #0b1219; border: 1px solid #223142; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; }
+        .chat-header { background: #16222f; padding: 20px; font-weight: 800; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #223142; }
         .ai-status { width: 12px; height: 12px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e; }
-        .chat-body { height: 360px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: radial-gradient(circle at center, #0e1722 0%, #05080c 100%); }
-        .msg { padding: 12px 16px; border-radius: 12px; max-width: 85%; font-size: 14.5px; line-height: 1.5; animation: fadeIn 0.3s ease; }
-        .msg.ai { background: #1e293b; align-self: flex-start; color: #f8fafc; border-bottom-left-radius: 2px; }
-        .msg.user { background: var(--accent-wood); align-self: flex-end; color: #fff; border-bottom-right-radius: 2px; box-shadow: 0 4px 10px rgba(230,126,34,0.3); }
+        .chat-body { height: 340px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #05080c; }
+        .msg { padding: 12px 16px; border-radius: 12px; max-width: 85%; font-size: 14px; }
+        .msg.ai { background: #1e293b; align-self: flex-start; color: #f8fafc; }
+        .msg.user { background: var(--accent-wood); align-self: flex-end; color: #fff; }
         
         .chat-recommendation { background: #16222f; border: 1px solid var(--accent-wood); border-radius: 8px; padding: 12px; margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
-        .chat-recommendation span { font-size: 11px; color: var(--accent-wood); font-weight: 900; text-transform: uppercase; }
-        .chat-recommendation h5 { font-size: 15px; font-weight: 700; }
-        .chat-recommendation-link { color: #fff; background: var(--accent-wood); text-decoration: none; padding: 6px; text-align: center; font-size: 12px; font-weight: bold; border-radius: 4px; transition: background 0.2s; }
-        .chat-recommendation-link:hover { background: #d35400; }
+        .chat-recommendation span { font-size: 11px; color: var(--accent-wood); font-weight: 900; }
+        .chat-footer { display: flex; padding: 15px; background: #16222f; gap: 12px; }
+        .chat-input { flex: 1; padding: 14px; border-radius: 8px; border: 1px solid #334155; background: #0b1219; color: white; }
 
-        .chat-footer { display: flex; padding: 15px; background: #16222f; gap: 12px; border-top: 1px solid #223142; }
-        .chat-input { flex: 1; padding: 14px; border-radius: 8px; border: 1px solid #334155; background: #0b1219; color: white; font-size: 14px; }
+        .floating-chat-btn { position: fixed; bottom: 20px; right: 20px; background-color: var(--accent-wood); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; text-decoration: none; z-index: 999; }
+        footer { background-color: #040608; color: #475569; padding: 40px 5%; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <a href="#consejos" class="floating-chat-btn">🌲</a>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">Nomad<span>Wild</span></a>
+            <ul class="nav-menu">
+                <li><a href="#supervivencia">Supervivencia</a></li>
+                <li><a href="#autocaravana">Casas Rodantes</a></li>
+                <li><a href="#pesca">Pesca</a></li>
+                <li><a href="#mapas">Rutas</a></li>
+                <li><a href="#consejos">NomadAI</a></li>
+                <li>
+                    <button class="cart-icon-btn" onclick="toggleCart()">🛒 Carrito <span class="cart-count" id="cartCount">0</span></button>
+                    <div class="cart-dropdown" id="cartDropdown">
+                        <h4 style="margin-bottom:12px; border-bottom:1px solid #34495e; padding-bottom:5px;">Tu Equipo</h4>
+                        <div id="cartItemsContainer"></div>
+                        <div class="cart-total"><span>Total:</span><span id="cartTotalValue">0,00 €</span></div>
+                        <button class="btn btn-camper" onclick="checkoutWhatsApp()">Procesar por WhatsApp</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="section-survival" id="supervivencia">
+        <h2>Supervivencia</h2>
