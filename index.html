@@ -14,7 +14,7 @@
         body {
             background-color: #111;
             color: #fff;
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; /* Hace que la pantalla se deslice suavemente al pulsar botones */
         }
         header {
             background-color: #1b2e1e;
@@ -46,7 +46,9 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s;
         }
+        .nav-menu a:hover { color: #e67e22; }
 
         /* --- SECCIÓN 1: SUPERVIVENCIA (VERDES) --- */
         .section-survival {
@@ -115,7 +117,7 @@
         .guide-box h4 { margin-bottom: 5px; color: #f8fafc; }
         .guide-box p { font-size: 14px; color: #94a3b8; }
 
-        /* Estilos del Chatbot interactivo */
+        /* Interfaz del Chatbot interactivo */
         .chat-widget {
             flex: 1;
             min-width: 300px;
@@ -209,6 +211,29 @@
         }
         .chat-input:focus { outline: none; border-color: #e67e22; }
 
+        /* Botón Flotante para ir al Chat desde el móvil */
+        .floating-chat-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #e67e22;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 999;
+            transition: transform 0.3s;
+        }
+        .floating-chat-btn:hover {
+            transform: scale(1.1);
+        }
+
         /* --- ESTILOS COMUNES DE PRODUCTOS --- */
         h2 { 
             font-size: 32px; 
@@ -264,6 +289,9 @@
 </head>
 <body>
 
+    <!-- BOTÓN FLOTANTE: Te lleva directo al chat al hacer clic -->
+    <a href="#consejos" class="floating-chat-btn" title="Preguntar a la IA">💬</a>
+
     <header>
         <div class="nav-container">
             <a href="#" class="logo">Nomad<span>Wild</span></a>
@@ -271,7 +299,8 @@
                 <li><a href="#supervivencia">Supervivencia</a></li>
                 <li><a href="#autocaravana">Casas Rodantes</a></li>
                 <li><a href="#pesca">Pesca</a></li>
-                <li><a href="#consejos">NomadAI & Consejos</a></li>
+                <!-- NUEVO BOTÓN EN MENÚ -->
+                <li><a href="#consejos" style="color: #e67e22; font-weight: bold;">🤖 Preguntar a NomadAI</a></li>
             </ul>
         </div>
     </header>
@@ -285,29 +314,3 @@
             <div class="prod-card survival-card">
                 <div>
                     <div class="prod-title">Kit Bushcraft Pro</div>
-                    <div class="prod-desc">Pedernal de ferrocerio, tarjeta multiusos y hacha ligera de acero carbono.</div>
-                </div>
-                <div>
-                    <div class="prod-price">45,00 €</div>
-                    <button class="btn btn-survival">Comprar Ahora</button>
-                </div>
-            </div>
-            <div class="prod-card survival-card">
-                <div>
-                    <div class="prod-title">Filtro Táctico de Agua</div>
-                    <div class="prod-desc">Purificador por filtración física de 0.1 micras. Elimina el 99.9% de bacterias.</div>
-                </div>
-                <div>
-                    <div class="prod-price">29,95 €</div>
-                    <button class="btn btn-survival">Comprar Ahora</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ZONA 2: AUTOCARAVANA (TONOS ATARDECER) -->
-    <section class="section-camper" id="autocaravana">
-        <h2>Mundo Casa Rodante & Overland</h2>
-        <p class="subtitle">Optimización de espacio y energía para tu vida en ruta</p>
-        
-
