@@ -7,254 +7,165 @@
     <link rel="stylesheet" href="https://unpkg.com" />
     <style>
         :root { --survival: #2e4f34; --camper: #d35400; --fishing: #1a365d; --dark: #0b0f12; --accent: #e67e22; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
         body { background-color: var(--dark); color: #f1f5f9; scroll-behavior: smooth; overflow-x: hidden; }
-        header { background: rgba(17, 24, 18, 0.95); padding: 20px 5%; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #273e2d; }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 26px; font-weight: 900; color: #fff; text-decoration: none; text-transform: uppercase; }
+        header { background: #111812; padding: 20px 5%; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #273e2d; }
+        .logo { font-size: 24px; font-weight: 900; color: #fff; text-decoration: none; }
         .logo span { color: var(--accent); }
-        .nav-menu { display: flex; list-style: none; align-items: center; }
-        .nav-menu li { margin-left: 25px; }
-        .nav-menu a { color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 14px; text-transform: uppercase; }
+        .nav-menu { display: flex; list-style: none; align-items: center; gap: 20px; }
+        .nav-menu a, .cart-btn { color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 13px; background: none; border: none; cursor: pointer; text-transform: uppercase; }
         section { padding: 60px 5%; text-align: center; }
-        .section-survival { background: linear-gradient(180deg, #111812 0%, var(--survival) 100%); }
-        .section-camper { background: linear-gradient(180deg, var(--survival) 0%, #3e2311 40%, var(--camper) 100%); }
-        .section-fishing { background: linear-gradient(180deg, var(--camper) 0%, #101d2d 50%, var(--fishing) 100%); }
-        .section-map-hub { background: linear-gradient(180deg, var(--fishing) 0%, #0d131a 100%); }
-        .section-ai-hub { background: linear-gradient(180deg, #0d131a 0%, #05070a 100%); border-top: 2px dashed #223142; }
-        h2 { font-size: 34px; font-weight: 900; margin-bottom: 15px; text-transform: uppercase; }
-        .subtitle { margin-bottom: 40px; font-size: 15px; color: #94a3b8; }
-        .grid-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
-        .prod-card { border-radius: 16px; padding: 25px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; min-height: 260px; border: 1px solid rgba(255,255,255,0.05); }
-        .survival-card { background: rgba(18, 31, 20, 0.8); border-left: 5px solid #4a7c59; }
-        .camper-card { background: rgba(44, 26, 16, 0.8); border-left: 5px solid var(--accent); }
-        .fishing-card { background: rgba(13, 30, 61, 0.8); border-left: 5px solid #2b6cb0; }
-        .prod-title { font-size: 20px; font-weight: bold; margin-bottom: 8px; }
-        .prod-desc { font-size: 13px; color: #94a3b8; margin-bottom: 15px; line-height: 1.4; }
-        .prod-price { font-size: 24px; font-weight: 900; margin-bottom: 15px; }
-        .btn { color: white; padding: 12px; text-decoration: none; font-weight: 800; border-radius: 8px; border: none; cursor: pointer; text-align: center; display: block; width: 100%; text-transform: uppercase; }
-        .btn-survival { background: #4a7c59; } .btn-camper { background: var(--accent); } .btn-fishing { background: #2b6cb0; }
-        .cart-icon-btn { background: none; border: none; color: white; cursor: pointer; font-size: 15px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
-        .cart-count { background: var(--accent); color: white; border-radius: 50%; padding: 2px 6px; font-size: 11px; }
-        .cart-dropdown { position: absolute; top: 70px; right: 5%; background: #151d24; border: 2px solid #223142; border-radius: 12px; width: 300px; padding: 15px; display: none; box-shadow: 0 20px 40px rgba(0,0,0,0.8); z-index: 2000; text-align: left; }
-        .cart-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; }
-        .cart-total { font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; margin-top: 10px; border-top: 1px solid #34495e; padding-top: 8px; }
-        .map-controls { margin-bottom: 20px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .btn-map-filter { background: #1e293b; border: 1px solid #334155; padding: 10px 20px; color: white; border-radius: 20px; cursor: pointer; font-size: 11px; }
-        .btn-map-filter.active { background: var(--accent); }
-        #map { height: 400px; width: 100%; max-width: 1200px; margin: 0 auto; border-radius: 16px; border: 2px solid #223142; }
-        .map-popup { color: #111; font-size: 13px; }
-        .map-popup h4 { font-weight: bold; }
-        .map-popup-btn { display: block; text-align: center; background: var(--accent); color: white !important; text-decoration: none; padding: 5px; font-size: 11px; border-radius: 4px; margin-top: 5px; }
-        .ai-container { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; text-align: left; }
-        .info-guides { flex: 1; min-width: 280px; }
-        .guide-box { background: #16222f; padding: 15px; border-radius: 12px; margin-bottom: 15px; border-left: 5px solid var(--accent); }
-        .chat-widget { flex: 1.5; min-width: 300px; background: #0b1219; border: 1px solid #223142; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; }
-        .chat-header { background: #16222f; padding: 15px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
-        .ai-status { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; }
-        .chat-body { height: 300px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #05080c; }
+        .sec-s { background: linear-gradient(180deg, #111812, var(--survival)); }
+        .sec-c { background: linear-gradient(180deg, var(--survival), var(--camper)); }
+        .sec-f { background: linear-gradient(180deg, var(--camper), var(--fishing)); }
+        .sec-m { background: linear-gradient(180deg, var(--fishing), #0d131a); }
+        .sec-a { background: linear-gradient(180deg, #0d131a, #05070a); border-top: 2px dashed #223142; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+        .card { border-radius: 12px; padding: 25px; text-align: left; background: rgba(0,0,0,0.4); border-left: 5px solid var(--accent); display: flex; flex-direction: column; justify-content: space-between; min-height: 240px; }
+        .btn { color: white; padding: 12px; font-weight: 800; border-radius: 6px; border: none; cursor: pointer; text-align: center; width: 100%; text-transform: uppercase; background: var(--accent); margin-top: 15px; }
+        .cart-dropdown { position: absolute; top: 70px; right: 5%; background: #151d24; border: 2px solid #223142; border-radius: 12px; width: 300px; padding: 15px; display: none; z-index: 2000; }
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; border-bottom: 1px solid #2c3e50; padding-bottom: 5px; }
+        #map { height: 400px; width: 100%; max-width: 1200px; margin: 20px auto 0 auto; border-radius: 16px; border: 2px solid #223142; }
+        .chat-widget { max-width: 600px; margin: 20px auto 0 auto; background: #0b1219; border: 1px solid #223142; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+        .chat-body { height: 280px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #05080c; text-align: left; }
         .msg { padding: 10px 14px; border-radius: 12px; max-width: 85%; font-size: 13px; }
         .msg.ai { background: #1e293b; align-self: flex-start; }
         .msg.user { background: var(--accent); align-self: flex-end; }
-        .chat-recommendation { background: #16222f; border: 1px solid var(--accent); border-radius: 6px; padding: 10px; margin-top: 5px; }
+        .chat-rec { background: #16222f; border: 1px solid var(--accent); border-radius: 6px; padding: 10px; margin-top: 8px; font-size: 12px; }
         .chat-footer { display: flex; padding: 12px; background: #16222f; gap: 10px; }
         .chat-input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #334155; background: #0b1219; color: white; }
-        .floating-chat-btn { position: fixed; bottom: 20px; right: 20px; background-color: var(--accent); color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; text-decoration: none; z-index: 999; }
-        footer { background-color: #040608; color: #475569; padding: 30px 5%; text-align: center; font-size: 13px; }
     </style>
 </head>
 <body>
-    <a href="#consejos" class="floating-chat-btn">🌲</a>
     <header>
-        <div class="nav-container">
-            <a href="#" class="logo">Nomad<span>Wild</span></a>
-            <ul class="nav-menu">
-                <li><a href="#supervivencia">Supervivencia</a></li>
-                <li><a href="#autocaravana">Casas Rodantes</a></li>
-                <li><a href="#pesca">Pesca</a></li>
-                <li><a href="#mapas">Rutas</a></li>
-                <li><a href="#consejos">NomadAI</a></li>
-                <li>
-                    <button class="cart-icon-btn" onclick="toggleCart()">🛒 Carrito <span class="cart-count" id="cartCount">0</span></button>
-                    <div class="cart-dropdown" id="cartDropdown">
-                        <h4 style="margin-bottom:10px; border-bottom:1px solid #34495e;">Tu Equipo</h4>
-                        <div id="cartItemsContainer"></div>
-                        <div class="cart-total"><span>Total:</span><span id="cartTotalValue">0,00 €</span></div>
-                        <button class="btn btn-camper" style="padding:8px; font-size:12px;" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <a href="#" class="logo">Nomad<span>Wild</span></a>
+        <ul class="nav-menu">
+            <li><a href="#survival">Supervivencia</a></li>
+            <li><a href="#camper">Casas Rodantes</a></li>
+            <li><a href="#fishing">Pesca</a></li>
+            <li><a href="#mapas">Rutas</a></li>
+            <li><a href="#consejos">NomadAI</a></li>
+            <li>
+                <button class="cart-btn" onclick="toggleCart()">🛒 Carrito (<span id="cartCount">0</span>)</button>
+                <div class="cart-dropdown" id="cartDropdown">
+                    <div id="cartItems"></div>
+                    <div style="margin: 10px 0; font-weight: bold;">Total: <span id="cartTotal">0.00 €</span></div>
+                    <button class="btn" style="padding: 8px; font-size: 11px;" onclick="checkout()">Pedir por WhatsApp</button>
+                </div>
+            </li>
+        </ul>
     </header>
-    <section class="section-survival" id="supervivencia">
+
+    <section class="sec-s" id="survival">
         <h2>Supervivencia</h2>
-        <p class="subtitle">Soporte técnico y resistencia extrema</p>
-        <div class="grid-products">
-            <div class="prod-card survival-card">
-                <div>
-                    <div class="prod-title">Kit Bushcraft Pro</div>
-                    <div class="prod-desc">Pedernal táctico, tarjeta multiusos de titanio y hacha ligera forjada.</div>
-                </div>
-                <div>
-                    <div class="prod-price">45,00 €</div>
-                    <button class="btn btn-survival" onclick="addToCart('Kit Bushcraft Pro', 45.00)">Añadir al Carrito</button>
-                </div>
+        <p style="color:#94a3b8; margin-bottom:30px;">Herramientas tácticas de resistencia extrema</p>
+        <div class="grid">
+            <div class="card" style="border-left-color: #4a7c59;">
+                <div><h3>Kit Bushcraft Pro</h3><p style="font-size:13px; color:#94a3b8; margin-top:5px;">Pedernal táctico, tarjeta multiusos de titanio y hacha ligera.</p></div>
+                <div><div style="font-size:22px; font-weight:900; margin-top:15px;">45.00 €</div><button class="btn" onclick="add('Kit Bushcraft Pro', 45)">Agregar</button></div>
             </div>
-            <div class="prod-card survival-card">
-                <div>
-                    <div class="prod-title">Filtro Táctico de Agua</div>
-                    <div class="prod-desc">Purificador portátil físico de 0.1 micras. Elimina bacterias al instante.</div>
-                </div>
-                <div>
-                    <div class="prod-price">29,95 €</div>
-                    <button class="btn btn-survival" onclick="addToCart('Filtro Táctico de Agua', 29.95)">Añadir al Carrito</button>
-                </div>
+            <div class="card" style="border-left-color: #4a7c59;">
+                <div><h3>Filtro Táctico de Agua</h3><p style="font-size:13px; color:#94a3b8; margin-top:5px;">Purificador portátil físico de 0.1 micras. Elimina bacterias.</p></div>
+                <div><div style="font-size:22px; font-weight:900; margin-top:15px;">29.95 €</div><button class="btn" onclick="add('Filtro Táctico de Agua', 29.95)">Agregar</button></div>
             </div>
         </div>
     </section>
-    <section class="section-camper" id="autocaravana">
-        <h2>Casas Rodantes & Overland</h2>
-        <p class="subtitle">Independencia energética off-grid en ruta</p>
-        <div class="grid-products">
-            <div class="prod-card camper-card">
-                <div>
-                    <div class="prod-title">Estación Solar 500W</div>
-                    <div class="prod-desc">Generador de litio con paneles monocristalinos portátiles y plegables.</div>
-                </div>
-                <div>
-                    <div class="prod-price">349,00 €</div>
-    <section class="section-fishing" id="pesca">
+
+    <section class="sec-c" id="camper">
+        <h2>Casas Rodantes</h2>
+        <p style="color:#94a3b8; margin-bottom:30px;">Independencia energética off-grid</p>
+        <div class="grid">
+            <div class="card" style="border-left-color: var(--accent);">
+                <div><h3>Estación Solar 500W</h3><p style="font-size:13px; color:#94a3b8; margin-top:5px;">Generador de litio con paneles monocristalinos plegables.</p></div>
+                <div><div style="font-size:22px; font-weight:900; margin-top:15px;">349.00 €</div><button class="btn" onclick="add('Estación Solar 500W', 349)">Agregar</button></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec-f" id="fishing">
         <h2>Pesca de Aventura</h2>
-        <p class="subtitle">Herramientas ligeras para pesca salvaje</p>
-        <div class="grid-products">
-            <div class="prod-card fishing-card">
-                <div>
-                    <div class="prod-title">Caña Telescópica Stealth</div>
-                    <div class="prod-desc">Fibra de carbono de alta densidad. Se reduce a solo 38cm para la camper.</div>
-                </div>
-                <div>
-                    <div class="prod-price">85,00 €</div>
-                    <button class="btn btn-fishing" onclick="addToCart('Caña Telescópica Stealth', 85.00)">Añadir al Carrito</button>
-                </div>
+        <p style="color:#94a3b8; margin-bottom:30px;">Herramientas modulares ligeras</p>
+        <div class="grid">
+            <div class="card" style="border-left-color: #2b6cb0;">
+                <div><h3>Caña Telescópica Stealth</h3><p style="font-size:13px; color:#94a3b8; margin-top:5px;">Fibra de carbono de alta densidad. Compacta a 38cm.</p></div>
+                <div><div style="font-size:22px; font-weight:900; margin-top:15px;">85.00 €</div><button class="btn" onclick="add('Caña Telescópica Stealth', 85)">Agregar</button></div>
             </div>
         </div>
     </section>
-    <section class="section-map-hub" id="mapas">
-        <h2>Mapa de Rutas en Tiempo Real</h2>
-        <div class="map-controls">
-            <button class="btn-map-filter active" onclick="filterMap('todos', this)">Ver Todo</button>
-            <button class="btn-map-filter" onclick="filterMap('camper', this)">Pernocta</button>
-            <button class="btn-map-filter" onclick="filterMap('pesca', this)">Pesca</button>
-            <button class="btn-map-filter" onclick="filterMap('suministros', this)">Suministros</button>
-        </div>
+
+    <section class="sec-m" id="mapas">
+        <h2>Rutas y Paradas en Tiempo Real</h2>
         <div id="map"></div>
     </section>
-    <section class="section-ai-hub" id="consejos">
-        <h2>Manual & NomadAI</h2>
-        <div class="ai-container">
-            <div class="info-guides">
-                <div class="guide-box"><h4>🔥 Hipotermia</h4><p>Aísla el cuerpo del suelo y genera calor inmediato con yesca resinosa.</p></div>
-                <div class="guide-box"><h4>🚐 Bomba Camper</h4><p>Desmonta el filtro transparente de tu bomba de 12V y limpia sedimentos.</p></div>
+    <section class="sec-a" id="consejos">
+        <h2>NomadAI Experto</h2>
+        <div class="chat-widget">
+            <div class="chat-body" id="chatBody">
+                <div class="msg ai">¡Conexión lista! Pregúntame sobre fuego, agua, baterías o nudos para darte una solución táctica al instante.</div>
             </div>
-            <div class="chat-widget">
-                <div class="chat-header"><div class="ai-status"></div><span>NomadAI Motor Salvaje</span></div>
-                <div class="chat-body" id="chatBody">
-                    <div class="msg ai">Introduce palabras como "fuego", "batería", "agua" o "pesca" para activar soluciones.</div>
-                </div>
-                <div class="chat-footer">
-                    <input type="text" id="userInput" class="chat-input" placeholder="Escribe tu problema aquí...">
-                    <button class="btn btn-camper" style="padding:10px; width:auto;" onclick="sendMessage()">Enviar</button>
-                </div>
+            <div class="chat-footer">
+                <input type="text" id="userInput" class="chat-input" placeholder="Escribe tu problema de ruta aquí...">
+                <button class="btn" style="width:auto; margin:0; padding:10px 20px;" onclick="send()">Enviar</button>
             </div>
         </div>
     </section>
+
     <footer><p>&copy; 2026 NomadWild. Diseñado para la autosuficiencia humana en la naturaleza libre.</p></footer>
+
     <script src="https://unpkg.com"></script>
     <script>
-        const map = L.map('map').setView([40.416775, -3.703790], 6);
-        L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', { attribution: '&copy; OSM' }).addTo(map);
-        const locations = [
-            { lat: 42.1523, lng: -8.1256, tipo: 'camper', titulo: 'Área Camper Miño', desc: 'Estacionamiento legal con vaciado gratuito.', prod: 'Estación Solar 500W', link: '#autocaravana' },
-            { lat: 42.6102, lng: 0.1254, tipo: 'camper', titulo: 'Refugio de Pineta', desc: 'Zonas autorizadas de montaña para pernoctar.', prod: 'Kit Bushcraft Pro', link: '#supervivencia' },
-            { lat: 42.8542, lng: -8.3214, tipo: 'pesca', titulo: 'Coto Fluvial Río Tambre', desc: 'Río truchero de alta corriente. Requiere pase.', prod: 'Caña Telescópica Stealth', link: '#pesca' },
-            { lat: 39.4699, lng: -6.3762, tipo: 'suministros', titulo: 'Hub Suministros Cáceres', desc: 'Recarga de propano y agua potable pura.', prod: 'Filtro Táctico de Agua', link: '#supervivencia' }
+        const map = L.map('map').setView([40.4167, -3.7037], 6);
+        L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png').addTo(map);
+
+        const points = [
+            { lat: 42.1523, lng: -8.1256, t: 'Área Camper Miño', d: 'Pernocta legal y vaciado gratuito.', p: 'Estación Solar 500W' },
+            { lat: 42.8542, lng: -8.3214, t: 'Coto Fluvial Río Tambre', d: 'Zona truchera de alta corriente.', p: 'Caña Telescópica Stealth' }
         ];
-        let markerLayers = [];
-        function loadMarkers(filterType) {
-            markerLayers.forEach(m => map.removeLayer(m)); markerLayers = [];
-            locations.forEach(loc => {
-                if (filterType === 'todos' || loc.tipo === filterType) {
-                    const marker = L.marker([loc.lat, loc.lng]).addTo(map);
-                    marker.bindPopup(`<div class="map-popup"><h4>${loc.titulo}</h4><p>${loc.desc}</p><a href="${loc.link}" class="map-popup-btn">Ver en Tienda</a></div>`);
-                    markerLayers.push(marker);
-                }
-            });
-        }
-        loadMarkers('todos');
-        function filterMap(type, button) {
-            document.querySelectorAll('.btn-map-filter').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active'); loadMarkers(type);
-        }
+        points.forEach(pt => {
+            L.marker([pt.lat, pt.lng]).addTo(map).bindPopup(`<b>${pt.t}</b><br>${pt.d}<br><span style="color:#e67e22;">🎒 Requiere: ${pt.p}</span>`);
+        });
+
         let cart = [];
-        function toggleCart() {
-            const display = document.getElementById('cartDropdown').style.display;
-            document.getElementById('cartDropdown').style.display = display === 'block' ? 'none' : 'block';
-        }
-        function addToCart(name, price) {
-            cart.push({ name, price }); updateCartUI();
-            document.getElementById('cartDropdown').style.display = 'block';
-        }
-        function updateCartUI() {
+        function toggleCart() { const d = document.getElementById('cartDropdown'); d.style.display = d.style.display === 'block' ? 'none' : 'block'; }
+        function add(n, p) { cart.push({ n, p }); updateCart(); }
+        function updateCart() {
             document.getElementById('cartCount').innerText = cart.length;
-            const container = document.getElementById('cartItemsContainer'); container.innerHTML = "";
-            let total = 0;
-            cart.forEach(item => {
-                total += item.price;
-                container.innerHTML += `<div class="cart-item"><span>${item.name}</span><strong>${item.price.toFixed(2)} €</strong></div>`;
-            });
-            document.getElementById('cartTotalValue').innerText = `${total.toFixed(2)} €`;
+            const c = document.getElementById('cartItems'); c.innerHTML = ""; let t = 0;
+            cart.forEach(i => { t += i.p; c.innerHTML += `<div class="cart-item"><span>${i.n}</span><strong>${i.p.toFixed(2)} €</strong></div>`; });
+            document.getElementById('cartTotal').innerText = `${t.toFixed(2)} €`;
         }
-        function checkoutWhatsApp() {
-            if(cart.length === 0) { alert('Carrito vacío'); return; }
-            let msg = "Hola NomadWild, deseo ordenar el siguiente equipo técnico:\n\n";
-            cart.forEach(i => msg += `- ${i.name} (${i.price.toFixed(2)} €)\n`);
-            msg += `\n*Total: ${cart.reduce((a, b) => a + b.price, 0).toFixed(2)} €*`;
-            window.open(`https://wa.me{encodeURIComponent(msg)}`, '_blank');
+        function checkout() {
+            if(!cart.length) return alert('Carrito vacío');
+            let m = "Deseo ordenar:\n"; cart.forEach(i => m += `- ${i.n} (${i.p}€)\n`);
+            window.open(`https://wa.me{encodeURIComponent(m)}`, '_blank');
         }
-        function sendMessage() {
-            const input = document.getElementById('userInput'); const chatBody = document.getElementById('chatBody');
-            const query = input.value.trim().toLowerCase(); if(query === "") return;
-            const uDiv = document.createElement('div'); uDiv.className = 'msg user'; uDiv.innerText = input.value;
-            chatBody.appendChild(uDiv); input.value = ""; chatBody.scrollTop = chatBody.scrollHeight;
+
+        function send() {
+            const input = document.getElementById('userInput'); const b = document.getElementById('chatBody');
+            const q = input.value.trim().toLowerCase(); if(!q) return;
+
+            b.innerHTML += `<div class="msg user">${input.value}</div>`; input.value = "";
+            b.scrollTop = b.scrollHeight;
+
             setTimeout(() => {
-                const aiDiv = document.createElement('div'); aiDiv.className = 'msg ai';
-                let txt = ""; let prod = null;
-                if(query.includes('fuego') || query.includes('encender') || query.includes('lluvia')) {
-                    txt = "🔥 FUEGO: Raspa la madera interna de troncos muertos. Usa el iniciador de ferrocerio para prender bajo tormenta.";
-                    prod = { n: "Kit Bushcraft Pro (Pedernal)", p: "45.00" };
-                } else if(query.includes('nudo') || query.includes('atar') || query.includes('cuerda')) {
-                    txt = "🪢 AMARRE: El nudo 'As de Guía' es el más confiable para remolques. Requieres cuerda sintética de tracción.";
-                    prod = { n: "Kit Bushcraft Pro (Cuerda Táctica)", p: "45.00" };
-                } else if(query.includes('bateria') || query.includes('luz') || query.includes('caravana') || query.includes('nevera')) {
-                    txt = "🚐 ENERGÍA CAMPER: Si tienes caídas de tensión, un generador de litio solar independiente mantendrá tus aparatos activos.";
-                    prod = { n: "Estación Solar 500W", p: "349.00" };
-                } else if(query.includes('pesca') || query.includes('pez') || query.includes('rio')) {
-                    txt = "🐟 PESCA: En ríos con mucha vegetación, las cañas telescópicas compactas evitan enredos mecánicos durante tus rutas.";
-                    prod = { n: "Caña Telescópica Stealth", p: "85.00" };
-                } else {
-                    txt = "🌲 CONSEJO: Mantén la calma. Filtra físicamente cualquier fuente de agua natural antes de consumirla.";
-                    prod = { n: "Filtro Táctico de Agua", p: "29.95" };
+                let txt = "🌲 CONSEJO: Mantén la calma. Asegura hidratación inmediata filtrando el agua natural.";
+                let prod = { n: "Filtro Táctico de Agua", p: 29.95 };
+
+                if(q.includes('fuego') || q.includes('encender')) {
+                    txt = "🔥 FUEGO: Raspa la madera interna de troncos secos caídos. Protege la brasa del viento y usa ferrocerio.";
+                    prod = { n: "Kit Bushcraft Pro", p: 45 };
+                } else if(q.includes('bateria') || q.includes('luz') || q.includes('caravana') || q.includes('nevera')) {
+                    txt = "Corección de corriente: Revisa fusibles de 12V. Si te falta carga, un panel solar portátil evitará fallas críticas.";
+                    prod = { n: "Estación Solar 500W", p: 349 };
+                } else if(q.includes('pesca') || q.includes('pez') || q.includes('rio')) {
+                    txt = "🐟 PESCA: En ríos con mucha maleza, usa cañas retráctiles compactas para evitar enganches mecánicos al caminar.";
+                    prod = { n: "Caña Telescópica Stealth", p: 85 };
                 }
-                aiDiv.innerHTML = `<p>${txt}</p>`;
-                if(prod) {
-                    const box = document.createElement('div'); box.className = 'chat-recommendation';
-                    box.innerHTML = `<span>🎒 Solución Directa:</span><h5>${prod.n}</h5><p style="font-weight:bold;color:#22c55e;margin:2px 0;">${prod.p} €</p><button class="btn btn-camper" style="padding:6px;font-size:11px;" onclick="addToCart('${prod.n}', ${parseFloat(prod.p)})">Añadir Directo</button>`;
-                    aiDiv.appendChild(box);
-                }
-                chatBody.appendChild(aiDiv); chatBody.scrollTop = chatBody.scrollHeight;
-            }, 500);
+
+                let html = `<div class="msg ai"><p>${txt}</p><div class="chat-rec"><span>🎒 Equipo:</span><br><b>${prod.n}</b> - ${prod.p}€<br><button class="btn" style="padding:4px; font-size:11px; margin-top:5px;" onclick="add('${prod.n}', ${prod.p})">Añadir directo</button></div></div>`;
+                b.innerHTML += html; b.scrollTop = b.scrollHeight;
+            }, 400);
         }
-        document.getElementById('userInput').addEventListener('keypress', function(e) { if(e.key === 'Enter') sendMessage(); });
     </script>
 </body>
 </html>
