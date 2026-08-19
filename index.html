@@ -4,105 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NomadWild | Portal de Aventura Off-Grid</title>
-    <!-- Librerías de Mapas en Tiempo Real -->
+    <!-- CORREGIDO: Librería del mapa completa -->
     <link rel="stylesheet" href="https://unpkg.com" />
     <style>
-        :root {
-            --survival-green: #2e4f34;
-            --camper-orange: #d35400;
-            --fishing-blue: #1a365d;
-            --wild-black: #0b0f12;
-            --accent-wood: #e67e22;
-        }
+        :root { --survival-green: #2e4f34; --camper-orange: #d35400; --fishing-blue: #1a365d; --wild-black: #0b0f12; --accent-wood: #e67e22; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: var(--wild-black); color: #f1f5f9; scroll-behavior: smooth; overflow-x: hidden; }
-        
-        header { 
-            background: rgba(17, 24, 18, 0.95); padding: 20px 5%; position: sticky; top: 0; z-index: 1000; 
-            border-bottom: 2px solid #273e2d; backdrop-filter: blur(10px);
-        }
+        header { background: rgba(17, 24, 18, 0.95); padding: 20px 5%; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #273e2d; }
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 26px; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
-        .logo span { color: var(--accent-wood); text-shadow: 0 0 10px rgba(230,126,34,0.4); }
+        .logo { font-size: 26px; font-weight: 900; color: #fff; text-decoration: none; text-transform: uppercase; }
+        .logo span { color: var(--accent-wood); }
         .nav-menu { display: flex; list-style: none; align-items: center; }
         .nav-menu li { margin-left: 25px; }
-        .nav-menu a { color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 14px; text-transform: uppercase; transition: all 0.4s ease; }
-        .nav-menu a:hover { color: var(--accent-wood); letter-spacing: 1px; }
-
-        section { padding: 80px 5%; text-align: center; }
+        .nav-menu a { color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 14px; text-transform: uppercase; }
+        section { padding: 60px 5%; text-align: center; }
         .section-survival { background: linear-gradient(180deg, #111812 0%, var(--survival-green) 100%); }
         .section-camper { background: linear-gradient(180deg, var(--survival-green) 0%, #3e2311 40%, var(--camper-orange) 100%); }
         .section-fishing { background: linear-gradient(180deg, var(--camper-orange) 0%, #101d2d 50%, var(--fishing-blue) 100%); }
         .section-map-hub { background: linear-gradient(180deg, var(--fishing-blue) 0%, #0d131a 100%); }
         .section-ai-hub { background: linear-gradient(180deg, #0d131a 0%, #05070a 100%); border-top: 2px dashed #223142; }
-
-        h2 { font-size: 38px; font-weight: 900; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0,0,0,0.8); }
-        .subtitle { margin-bottom: 50px; font-size: 16px; color: #94a3b8; font-style: italic; }
-
-        .grid-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; max-width: 1200px; margin: 0 auto; }
-        .prod-card { 
-            border-radius: 16px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); 
-            display: flex; flex-direction: column; justify-content: space-between; text-align: left; min-height: 280px; 
-            transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
-        }
-        .prod-card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(255,255,255,0.15); }
+        h2 { font-size: 34px; font-weight: 900; margin-bottom: 15px; text-transform: uppercase; }
+        .subtitle { margin-bottom: 40px; font-size: 15px; color: #94a3b8; }
+        .grid-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+        .prod-card { border-radius: 16px; padding: 25px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; min-height: 260px; border: 1px solid rgba(255,255,255,0.05); }
         .survival-card { background: rgba(18, 31, 20, 0.8); border-left: 5px solid #4a7c59; }
         .camper-card { background: rgba(44, 26, 16, 0.8); border-left: 5px solid var(--accent-wood); }
         .fishing-card { background: rgba(13, 30, 61, 0.8); border-left: 5px solid #2b6cb0; }
-        
-        .prod-title { font-size: 22px; font-weight: 800; margin-bottom: 12px; }
-        .prod-desc { font-size: 14px; color: #94a3b8; margin-bottom: 25px; line-height: 1.5; }
-        .prod-price { font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 20px; }
-        
-        .btn { 
-            color: white; padding: 14px; text-decoration: none; font-weight: 800; border-radius: 8px; border: none; 
-            cursor: pointer; text-align: center; display: block; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; 
-        }
-        .btn-survival { background: #4a7c59; } .btn-survival:hover { background: #385e43; }
-        .btn-camper { background: var(--accent-wood); } .btn-camper:hover { background: #d35400; }
-        .btn-fishing { background: #2b6cb0; } .btn-fishing:hover { background: #1a4975; }
-
-        /* CARRITO */
-        .cart-icon-btn { position: relative; background: none; border: none; color: white; cursor: pointer; font-size: 16px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
-        .cart-count { background: var(--accent-wood); color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; }
-        .cart-dropdown { 
-            position: absolute; top: 70px; right: 5%; background: #151d24; border: 2px solid #223142; 
-            border-radius: 12px; width: 340px; padding: 20px; display: none; box-shadow: 0 20px 40px rgba(0,0,0,0.8); z-index: 2000; text-align: left;
-        }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #2c3e50; font-size: 14px; }
-        .cart-total { font-size: 18px; font-weight: 900; display: flex; justify-content: space-between; margin: 15px 0; border-top: 2px solid #34495e; padding-top: 10px; }
-
-        /* MAPA */
-        .map-controls { margin-bottom: 30px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-        .btn-map-filter { background: #1e293b; border: 1px solid #334155; padding: 12px 24px; color: white; border-radius: 30px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-size: 11px; }
-        .btn-map-filter.active { background: var(--accent-wood); border-color: var(--accent-wood); }
-        #map { height: 450px; width: 100%; max-width: 1200px; margin: 0 auto; border-radius: 16px; border: 2px solid #223142; }
-        .map-popup { color: #111; min-width: 180px; }
-        .map-popup h4 { font-weight: 800; color: #0f172a; margin-bottom: 4px; }
-        .map-popup p { font-size: 13px; color: #475569; }
-        .map-popup-btn { display: block; text-align: center; background: var(--accent-wood); color: white !important; text-decoration: none; padding: 6px; font-size: 11px; font-weight: bold; border-radius: 4px; margin-top: 8px; }
-
-        /* CHAT IA */
-        .ai-container { display: flex; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto; text-align: left; }
-        .info-guides { flex: 1; min-width: 300px; }
-        .guide-box { background: #16222f; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 5px solid var(--accent-wood); }
-        .guide-box h4 { margin-bottom: 8px; font-weight: 800; }
-        .guide-box p { font-size: 14px; color: #94a3b8; line-height: 1.5; }
-        .chat-widget { flex: 1.5; min-width: 320px; background: #0b1219; border: 1px solid #223142; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; }
-        .chat-header { background: #16222f; padding: 20px; font-weight: 800; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #223142; }
-        .ai-status { width: 12px; height: 12px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e; }
-        .chat-body { height: 340px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #05080c; }
-        .msg { padding: 12px 16px; border-radius: 12px; max-width: 85%; font-size: 14px; }
-        .msg.ai { background: #1e293b; align-self: flex-start; color: #f8fafc; }
-        .msg.user { background: var(--accent-wood); align-self: flex-end; color: #fff; }
-        
-        .chat-recommendation { background: #16222f; border: 1px solid var(--accent-wood); border-radius: 8px; padding: 12px; margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
-        .chat-recommendation span { font-size: 11px; color: var(--accent-wood); font-weight: 900; }
-        .chat-footer { display: flex; padding: 15px; background: #16222f; gap: 12px; }
-        .chat-input { flex: 1; padding: 14px; border-radius: 8px; border: 1px solid #334155; background: #0b1219; color: white; }
-
-        .floating-chat-btn { position: fixed; bottom: 20px; right: 20px; background-color: var(--accent-wood); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; text-decoration: none; z-index: 999; }
-        footer { background-color: #040608; color: #475569; padding: 40px 5%; text-align: center; }
+        .prod-title { font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+        .prod-desc { font-size: 13px; color: #94a3b8; margin-bottom: 15px; line-height: 1.4; }
+        .prod-price { font-size: 24px; font-weight: 900; margin-bottom: 15px; }
+        .btn { color: white; padding: 12px; text-decoration: none; font-weight: 800; border-radius: 8px; border: none; cursor: pointer; text-align: center; display: block; width: 100%; text-transform: uppercase; }
+        .btn-survival { background: #4a7c59; } .btn-camper { background: var(--accent-wood); } .btn-fishing { background: #2b6cb0; }
+        .cart-icon-btn { background: none; border: none; color: white; cursor: pointer; font-size: 15px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+        .cart-count { background: var(--accent-wood); color: white; border-radius: 50%; padding: 2px 6px; font-size: 11px; }
+        .cart-dropdown { position: absolute; top: 70px; right: 5%; background: #151d24; border: 2px solid #223142; border-radius: 12px; width: 300px; padding: 15px; display: none; box-shadow: 0 20px 40px rgba(0,0,0,0.8); z-index: 2000; text-align: left; }
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; }
+        .cart-total { font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; margin-top: 10px; border-top: 1px solid #34495e; padding-top: 8px; }
+        .map-controls { margin-bottom: 20px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .btn-map-filter { background: #1e293b; border: 1px solid #334155; padding: 10px 20px; color: white; border-radius: 20px; cursor: pointer; font-size: 11px; }
+        .btn-map-filter.active { background: var(--accent-wood); }
+        #map { height: 400px; width: 100%; max-width: 1200px; margin: 0 auto; border-radius: 16px; border: 2px solid #223142; }
+        .map-popup { color: #111; font-size: 13px; }
+        .map-popup h4 { font-weight: bold; }
+        .map-popup-btn { display: block; text-align: center; background: var(--accent-wood); color: white !important; text-decoration: none; padding: 5px; font-size: 11px; border-radius: 4px; margin-top: 5px; }
+        .ai-container { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; text-align: left; }
+        .info-guides { flex: 1; min-width: 280px; }
+        .guide-box { background: #16222f; padding: 15px; border-radius: 12px; margin-bottom: 15px; border-left: 5px solid var(--accent-wood); }
+        .chat-widget { flex: 1.5; min-width: 300px; background: #0b1219; border: 1px solid #223142; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; }
+        .chat-header { background: #16222f; padding: 15px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        .ai-status { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; }
+        .chat-body { height: 300px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #05080c; }
+        .msg { padding: 10px 14px; border-radius: 12px; max-width: 85%; font-size: 13px; }
+        .msg.ai { background: #1e293b; align-self: flex-start; }
+        .msg.user { background: var(--accent-wood); align-self: flex-end; }
+        .chat-recommendation { background: #16222f; border: 1px solid var(--accent-wood); border-radius: 6px; padding: 10px; margin-top: 5px; }
+        .chat-footer { display: flex; padding: 12px; background: #16222f; gap: 10px; }
+        .chat-input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #334155; background: #0b1219; color: white; }
+        .floating-chat-btn { position: fixed; bottom: 20px; right: 20px; background-color: var(--accent-wood); color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; text-decoration: none; z-index: 999; }
+        footer { background-color: #040608; color: #475569; padding: 30px 5%; text-align: center; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -121,10 +80,10 @@
                 <li>
                     <button class="cart-icon-btn" onclick="toggleCart()">🛒 Carrito <span class="cart-count" id="cartCount">0</span></button>
                     <div class="cart-dropdown" id="cartDropdown">
-                        <h4 style="margin-bottom:12px; border-bottom:1px solid #34495e; padding-bottom:5px;">Tu Equipo</h4>
+                        <h4 style="margin-bottom:10px; border-bottom:1px solid #34495e;">Tu Equipo</h4>
                         <div id="cartItemsContainer"></div>
                         <div class="cart-total"><span>Total:</span><span id="cartTotalValue">0,00 €</span></div>
-                        <button class="btn btn-camper" onclick="checkoutWhatsApp()">Procesar por WhatsApp</button>
+                        <button class="btn btn-camper" style="padding:8px; font-size:12px;" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button>
                     </div>
                 </li>
             </ul>
@@ -133,3 +92,38 @@
 
     <section class="section-survival" id="supervivencia">
         <h2>Supervivencia</h2>
+        <p class="subtitle">Soporte técnico y resistencia extrema</p>
+        <div class="grid-products">
+            <div class="prod-card survival-card">
+                <div>
+                    <div class="prod-title">Kit Bushcraft Pro</div>
+                    <div class="prod-desc">Pedernal táctico, tarjeta multiusos de titanio y hacha ligera forjada.</div>
+                </div>
+                <div>
+                    <div class="prod-price">45,00 €</div>
+                    <button class="btn btn-survival" onclick="addToCart('Kit Bushcraft Pro', 45.00)">Añadir al Carrito</button>
+                </div>
+            </div>
+            <div class="prod-card survival-card">
+                <div>
+                    <div class="prod-title">Filtro Táctico de Agua</div>
+                    <div class="prod-desc">Purificador portátil físico de 0.1 micras. Elimina bacterias al instante.</div>
+                </div>
+                <div>
+                    <div class="prod-price">29,95 €</div>
+                    <button class="btn btn-survival" onclick="addToCart('Filtro Táctico de Agua', 29.95)">Añadir al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-camper" id="autocaravana">
+        <h2>Casas Rodantes & Overland</h2>
+        <p class="subtitle">Independencia energética off-grid en ruta</p>
+        <div class="grid-products">
+            <div class="prod-card camper-card">
+                <div>
+                    <div class="prod-title">Estación Solar 500W</div>
+                    <div class="prod-desc">Generador de litio con paneles monocristalinos portátiles y plegables.</div>
+                </div>
+Usa el código con precaución.349,00 €Añadir al Carrito© 2026 NomadWild. Diseñado para la autosuficiencia humana en la naturaleza libre.const map = L.map('map').setView([40.416775, -3.703790], 6);L.tileLayer('https://{s}{z}/{x}/{y}{r}.png', { attribution: '© OSM' }).addTo(map);const locations = [{ lat: 42.1523, lng: -8.1256, tipo: 'camper', titulo: 'Área Camper Miño', desc: 'Estacionamiento legal con vaciado gratuito.', prod: 'Estación Solar 500W', link: '#autocaravana' },{ lat: 42.6102, lng: 0.1254, tipo: 'camper', titulo: 'Refugio de Pineta', desc: 'Zonas autorizadas de montaña para pernoctar.', prod: 'Kit Bushcraft Pro', link: '#supervivencia' },{ lat: 42.8542, lng: -8.3214, tipo: 'pesca', titulo: 'Coto Fluvial Río Tambre', desc: 'Río truchero de alta corriente. Requiere pase.', prod: 'Caña Telescópica Stealth', link: '#pesca' },{ lat: 39.4699, lng: -6.3762, tipo: 'suministros', titulo: 'Hub Suministros Cáceres', desc: 'Recarga de propano y agua potable pura.', prod: 'Filtro Táctico de Agua', link: '#supervivencia' }];let markerLayers = [];function loadMarkers(filterType) {markerLayers.forEach(m => map.removeLayer(m)); markerLayers = [];locations.forEach(loc => {if (filterType === 'todos' || loc.tipo === filterType) {const marker = L.marker([loc.lat, loc.lng]).addTo(map);marker.bindPopup(<div class="map-popup"><h4>${loc.titulo}</h4><p>${loc.desc}</p><a href="${loc.link}" class="map-popup-btn">Ver en Tienda</a></div>);markerLayers.push(marker);}});}loadMarkers('todos');function filterMap(type, button) {document.querySelectorAll('.btn-map-filter').forEach(btn => btn.classList.remove('active'));button.classList.add('active'); loadMarkers(type);}let cart = [];function toggleCart() {const display = document.getElementById('cartDropdown').style.display;document.getElementById('cartDropdown').style.display = display === 'block' ? 'none' : 'block';}function addToCart(name, price) {cart.push({ name, price }); updateCartUI();document.getElementById('cartDropdown').style.display = 'block';}function updateCartUI() {document.getElementById('cartCount').innerText = cart.length;const container = document.getElementById('cartItemsContainer'); container.innerHTML = "";let total = 0;cart.forEach(item => {total += item.price;container.innerHTML += <div class="cart-item"><span>${item.name}</span><strong>${item.price.toFixed(2)} €</strong></div>;});document.getElementById('cartTotalValue').innerText = ${total.toFixed(2)} €;}function checkoutWhatsApp() {if(cart.length === 0) { alert('Carrito vacío'); return; }let msg = "Hola NomadWild, deseo ordenar el siguiente equipo técnico:\n\n";cart.forEach(i => msg += - ${i.name} (${i.price.toFixed(2)} €)\n);msg += \n*Total: ${cart.reduce((a, b) => a + b.price, 0).toFixed(2)} €*;window.open(https://wa.me{encodeURIComponent(msg)}, '_blank');}function sendMessage() {const input = document.getElementById('userInput'); const chatBody = document.getElementById('chatBody');const query = input.value.trim().toLowerCase(); if(query === "") return;const uDiv = document.createElement('div'); uDiv.className = 'msg user'; uDiv.innerText = input.value;chatBody.appendChild(uDiv); input.value = ""; chatBody.scrollTop = chatBody.scrollHeight;setTimeout(() => {const aiDiv = document.createElement('div'); aiDiv.className = 'msg ai';let txt = ""; let prod = null;if(query.includes('fuego') || query.includes('encender') || query.includes('lluvia')) {txt = "🔥 FUEGO: Raspa la madera interna de troncos muertos. Usa el iniciador de ferrocerio para prender bajo tormenta.";prod = { n: "Kit Bushcraft Pro (Pedernal)", p: "45.00" };} else if(query.includes('nudo') || query.includes('atar') || query.includes('cuerda')) {txt = "🪢 AMARRE: El nudo 'As de Guía' es el más confiable para remolques. Requiere cuerda sintética de tracción.";prod = { n: "Kit Bushcraft Pro (Cuerda Táctica)", p: "45.00" };} else if(query.includes('bateria') || query.includes('luz') || query.includes('caravana') || query.includes('nevera')) {txt = "🚐 ENERGÍA CAMPER: Si tienes caídas de tensión, un generador de litio solar independiente mantendrá tus aparatos activos de forma segura.";prod = { n: "Estación Solar 500W", p: "349.00" };} else if(query.includes('pesca') || query.includes('pez') || query.includes('rio')) {txt = "🐟 PESCA: En ríos con mucha vegetación, las cañas telescópicas compactas evitan enredos mecánicos durante tus caminatas.";prod = { n: "Caña Telescópica Stealth", p: "85.00" };} else {txt = "🌲 CONSEJO: Mantén la calma. Filtra físicamente cualquier fuente de agua natural antes de consumirla.";prod = { n: "Filtro Táctico de Agua", p: "29.95" };}aiDiv.innerHTML = <p>${txt}</p>;if(prod) {const box = document.createElement('div'); box.className = 'chat-recommendation';box.innerHTML = <span>🎒 Solución Directa:</span><h5>${prod.n}</h5><p style="font-weight:bold;color:#22c55e;margin:2px 0;">${prod.p} €</p><button class="btn btn-camper" style="padding:6px;font-size:11px;" onclick="addToCart('${prod.n}', ${parseFloat(prod.p)})">Añadir Directo</button>;aiDiv.appendChild(box);}chatBody.appendChild(aiDiv); chatBody.scrollTop = chatBody.scrollHeight;}, 500);}document.getElementById('userInput').addEventListener('keypress', function(e) { if(e.key === 'Enter') sendMessage(); });
