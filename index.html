@@ -3,294 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NomadWild | Aventura Activa e Inteligencia Salvaje</title>
+    <title>NomadWild | Aventura Activa</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: #111;
-            color: #fff;
-            scroll-behavior: smooth; /* Hace que la pantalla se deslice suavemente al pulsar botones */
-        }
-        header {
-            background-color: #1b2e1e;
-            color: white;
-            padding: 15px 5%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid #2e4f34;
-        }
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #111; color: #fff; scroll-behavior: smooth; }
+        header { background-color: #1b2e1e; padding: 15px 5%; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #2e4f34; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; color: white; text-decoration: none; }
         .logo span { color: #e67e22; }
-        .nav-menu {
-            display: flex;
-            list-style: none;
-        }
+        .nav-menu { display: flex; list-style: none; }
         .nav-menu li { margin-left: 20px; }
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+        .nav-menu a { color: white; text-decoration: none; font-weight: 500; }
         .nav-menu a:hover { color: #e67e22; }
 
-        /* --- SECCIÓN 1: SUPERVIVENCIA (VERDES) --- */
-        .section-survival {
-            background: linear-gradient(180deg, #1b2e1e 0%, #2e4f34 100%);
-            padding: 60px 5%;
-            text-align: center;
-        }
-        .survival-card {
-            background: #121f14;
-            border-top: 4px solid #4a7c59;
-        }
+        /* --- COLORES Y GRADIENTES SOLICITADOS --- */
+        .section-survival { background: linear-gradient(180deg, #1b2e1e 0%, #2e4f34 100%); padding: 60px 5%; text-align: center; }
+        .survival-card { background: #121f14; border-top: 4px solid #4a7c59; }
         .btn-survival { background-color: #4a7c59; }
-        .btn-survival:hover { background-color: #385e43; }
 
-        /* --- SECCIÓN 2: AUTOCARAVANA (ATARDECER / CÁLIDOS) --- */
-        .section-camper {
-            background: linear-gradient(180deg, #2e4f34 0%, #d35400 30%, #c0392b 100%);
-            padding: 60px 5%;
-            text-align: center;
-        }
-        .camper-card {
-            background: #2c1a10;
-            border-top: 4px solid #e67e22;
-        }
+        .section-camper { background: linear-gradient(180deg, #2e4f34 0%, #d35400 30%, #c0392b 100%); padding: 60px 5%; text-align: center; }
+        .camper-card { background: #2c1a10; border-top: 4px solid #e67e22; }
         .btn-camper { background-color: #e67e22; }
-        .btn-camper:hover { background-color: #d35400; }
 
-        /* --- SECCIÓN 3: PESCA (AZULES DE AGUA) --- */
-        .section-fishing {
-            background: linear-gradient(180deg, #c0392b 0%, #1a365d 40%, #0f172a 100%);
-            padding: 60px 5%;
-            text-align: center;
-        }
-        .fishing-card {
-            background: #0d1e3d;
-            border-top: 4px solid #2b6cb0;
-        }
+        .section-fishing { background: linear-gradient(180deg, #c0392b 0%, #1a365d 40%, #0f172a 100%); padding: 60px 5%; text-align: center; }
+        .fishing-card { background: #0d1e3d; border-top: 4px solid #2b6cb0; }
         .btn-fishing { background-color: #2b6cb0; }
-        .btn-fishing:hover { background-color: #2b529a; }
 
-        /* --- SECCIÓN 4: CONSEJOS & NOMAD AI (ZONA OSCURA TÁCTICA) --- */
-        .section-ai-hub {
-            background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
-            padding: 60px 5%;
-            border-top: 2px dashed #1e293b;
-        }
-        .ai-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: left;
-        }
-        .info-guides {
-            flex: 1;
-            min-width: 300px;
-        }
-        .guide-box {
-            background: #1e293b;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border-left: 4px solid #e67e22;
-        }
+        .section-ai-hub { background: linear-gradient(180deg, #0f172a 0%, #020617 100%); padding: 60px 5%; border-top: 2px dashed #1e293b; }
+        .ai-container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto; text-align: left; }
+        .info-guides { flex: 1; min-width: 300px; }
+        .guide-box { background: #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #e67e22; }
         .guide-box h4 { margin-bottom: 5px; color: #f8fafc; }
         .guide-box p { font-size: 14px; color: #94a3b8; }
 
-        /* Interfaz del Chatbot interactivo */
-        .chat-widget {
-            flex: 1;
-            min-width: 300px;
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-        }
-        .chat-header {
-            background: #1e293b;
-            padding: 15px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid #334155;
-        }
-        .ai-status {
-            width: 10px;
-            height: 10px;
-            background: #22c55e;
-            border-radius: 50%;
-        }
-        .chat-body {
-            height: 320px;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .msg {
-            padding: 10px 14px;
-            border-radius: 8px;
-            max-width: 85%;
-            font-size: 14px;
-            line-height: 1.4;
-        }
+        /* --- INTERFAZ DEL CHAT DE ASISTENCIA --- */
+        .chat-widget { flex: 1; min-width: 300px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 25px rgba(0,0,0,0.5); }
+        .chat-header { background: #1e293b; padding: 15px; font-weight: bold; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #334155; }
+        .ai-status { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; }
+        .chat-body { height: 320px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 10px 14px; border-radius: 8px; max-width: 85%; font-size: 14px; line-height: 1.4; }
         .msg.ai { background: #334155; align-self: flex-start; color: #fff; }
         .msg.user { background: #e67e22; align-self: flex-end; color: #fff; }
         
-        /* Caja de producto recomendado dentro del chat */
-        .chat-recommendation {
-            background: #1e293b;
-            border: 1px solid #e67e22;
-            border-radius: 6px;
-            padding: 10px;
-            margin-top: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .chat-recommendation span {
-            font-size: 11px;
-            color: #e67e22;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-        .chat-recommendation h5 {
-            font-size: 14px;
-            color: #fff;
-        }
-        .chat-recommendation-link {
-            color: #fff;
-            background: #e67e22;
-            text-decoration: none;
-            padding: 5px;
-            text-align: center;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-top: 5px;
-        }
+        .chat-recommendation { background: #1e293b; border: 1px solid #e67e22; border-radius: 6px; padding: 10px; margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+        .chat-recommendation span { font-size: 11px; color: #e67e22; text-transform: uppercase; font-weight: bold; }
+        .chat-recommendation h5 { font-size: 14px; color: #fff; }
+        .chat-recommendation-link { color: #fff; background: #e67e22; text-decoration: none; padding: 5px; text-align: center; font-size: 12px; font-weight: bold; border-radius: 4px; }
 
-        .chat-footer {
-            display: flex;
-            padding: 10px;
-            background: #1e293b;
-            gap: 10px;
-        }
-        .chat-input {
-            flex: 1;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #475569;
-            background: #0f172a;
-            color: white;
-        }
+        .chat-footer { display: flex; padding: 10px; background: #1e293b; gap: 10px; }
+        .chat-input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; }
         .chat-input:focus { outline: none; border-color: #e67e22; }
 
-        /* Botón Flotante para ir al Chat desde el móvil */
-        .floating-chat-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #e67e22;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            z-index: 999;
-            transition: transform 0.3s;
-        }
-        .floating-chat-btn:hover {
-            transform: scale(1.1);
-        }
+        .floating-chat-btn { position: fixed; bottom: 20px; right: 20px; background-color: #e67e22; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 999; }
 
-        /* --- ESTILOS COMUNES DE PRODUCTOS --- */
-        h2 { 
-            font-size: 32px; 
-            margin-bottom: 10px; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        .subtitle {
-            margin-bottom: 40px;
-            font-size: 16px;
-            color: #e2e8f0;
-            text-align: center;
-        }
-        .grid-products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .prod-card {
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: left;
-            min-height: 250px;
-        }
-        .prod-title { font-size: 20px; font-weight: bold; margin-bottom: 10px; color: #fff; }
+        /* --- ESTILOS DE PRODUCTO --- */
+        h2 { font-size: 32px; margin-bottom: 10px; text-transform: uppercase; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .subtitle { margin-bottom: 40px; font-size: 16px; color: #e2e8f0; }
+        .grid-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .prod-card { border-radius: 12px; padding: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: space-between; text-align: left; min-height: 230px; }
+        .prod-title { font-size: 20px; font-weight: bold; margin-bottom: 10px; }
         .prod-desc { font-size: 14px; color: #cbd5e1; margin-bottom: 20px; }
-        .prod-price { font-size: 24px; font-weight: bold; margin-bottom: 15px; color: #fff; }
-        .btn {
-            color: white;
-            padding: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            transition: background 0.3s;
-        }
-
-        footer {
-            background-color: #020617;
-            color: #64748b;
-            padding: 40px 5%;
-            text-align: center;
-            border-top: 1px solid #1e293b;
-        }
+        .prod-price { font-size: 24px; font-weight: bold; margin-bottom: 15px; }
+        .btn { color: white; padding: 12px; text-decoration: none; font-weight: bold; border-radius: 6px; border: none; cursor: pointer; text-align: center; }
+        footer { background-color: #020617; color: #64748b; padding: 40px 5%; text-align: center; }
     </style>
 </head>
 <body>
 
-    <!-- BOTÓN FLOTANTE: Te lleva directo al chat al hacer clic -->
-    <a href="#consejos" class="floating-chat-btn" title="Preguntar a la IA">💬</a>
+    <a href="#consejos" class="floating-chat-btn">💬</a>
 
     <header>
         <div class="nav-container">
@@ -299,18 +79,88 @@
                 <li><a href="#supervivencia">Supervivencia</a></li>
                 <li><a href="#autocaravana">Casas Rodantes</a></li>
                 <li><a href="#pesca">Pesca</a></li>
-                <!-- NUEVO BOTÓN EN MENÚ -->
-                <li><a href="#consejos" style="color: #e67e22; font-weight: bold;">🤖 Preguntar a NomadAI</a></li>
+                <li><a href="#consejos" style="color: #e67e22; font-weight: bold;">🤖 Chat NomadAI</a></li>
             </ul>
         </div>
     </header>
 
-    <!-- ZONA 1: SUPERVIVENCIA (TONOS VERDES) -->
+    <!-- VERDES: SUPERVIVENCIA -->
     <section class="section-survival" id="supervivencia">
-        <h2>Equipamiento de Supervivencia</h2>
-        <p class="subtitle">Herramientas tácticas y resistencia en entornos hostiles</p>
-        
+        <h2>Supervivencia</h2>
+        <p class="subtitle">Herramientas tácticas de resistencia</p>
         <div class="grid-products">
             <div class="prod-card survival-card">
                 <div>
                     <div class="prod-title">Kit Bushcraft Pro</div>
+                    <div class="prod-desc">Pedernal de ferrocerio, tarjeta multiusos y hacha ligera.</div>
+                </div>
+                <div>
+                    <div class="prod-price">45,00 €</div>
+                    <button class="btn btn-survival">Comprar</button>
+                </div>
+            </div>
+            <div class="prod-card survival-card">
+                <div>
+                    <div class="prod-title">Filtro Táctico de Agua</div>
+                    <div class="prod-desc">Purificador portátil físico de 0.1 micras.</div>
+                </div>
+                <div>
+                    <div class="prod-price">29,95 €</div>
+                    <button class="btn btn-survival">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NARANJA: CÁLIDOS ATARDECER -->
+    <section class="section-camper" id="autocaravana">
+        <h2>Casas Rodantes & Overland</h2>
+        <p class="subtitle">Optimización de espacio y energía en ruta</p>
+        <div class="grid-products">
+            <div class="prod-card camper-card">
+                <div>
+                    <div class="prod-title">Estación Solar 500W</div>
+                    <div class="prod-desc">Generador de energía móvil con panel plegable integrado.</div>
+                </div>
+                <div>
+                    <div class="prod-price">349,00 €</div>
+                    <button class="btn btn-camper">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AZUL profundidades: PESCA -->
+    <section class="section-fishing" id="pesca">
+        <h2>Pesca de Aventura</h2>
+        <p class="subtitle">Equipamiento técnico para tus capturas</p>
+        <div class="grid-products">
+            <div class="prod-card fishing-card">
+                <div>
+                    <div class="prod-title">Caña Telescópica Stealth</div>
+                    <div class="prod-desc">Fibra de carbono de alta densidad compacta.</div>
+                </div>
+                <div>
+                    <div class="prod-price">85,00 €</div>
+                    <button class="btn btn-fishing">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAT INTERACTIVO CON IA -->
+    <section class="section-ai-hub" id="consejos">
+        <h2>Consejos & Auxilio Digital</h2>
+        <p class="subtitle">Respuestas automáticas ante imprevistos naturales</p>
+        <div class="ai-container">
+            <div class="info-guides">
+                <div class="guide-box"><h4>🔥 Fuego Crítico</h4><p>Si la yesca se moja, raspa resina de pino seca de coníferas.</p></div>
+                <div class="guide-box"><h4>🪢 Nudos Fuertes</h4><p>Usa el nudo 'As de Guía' para amarres estables que no se deslizan.</p></div>
+            </div>
+            <div class="chat-widget">
+                <div class="chat-header"><div class="ai-status"></div><span>NomadAI Asistente</span></div>
+                <div class="chat-body" id="chatBody">
+                    <div class="msg ai">¡Hola! Dime qué problema tienes en la naturaleza (fuego, agua, avería camper, nudos) y te daré la solución táctica y el equipo necesario.</div>
+                </div>
+                <div class="chat-footer">
+                    <input type="text" id="userInput" class="chat-input" placeholder="Ej: ¿Cómo hago fuego si llueve?">
